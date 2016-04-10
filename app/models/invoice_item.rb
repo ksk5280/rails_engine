@@ -1,4 +1,4 @@
 class InvoiceItem < ActiveRecord::Base
   belongs_to :invoice
-  belongs_to :items
+  belongs_to :item
 end
