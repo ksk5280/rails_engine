@@ -12,14 +12,22 @@ module Api
       end
 
       def find
-        attribute = params.first[0].to_sym
-        respond_with Merchant.find_by(attribute => params[attribute].downcase)
+        respond_with Merchant.find_by(attributes(params))
       end
 
       def find_all
-        attribute = params.first[0].to_sym
-        respond_with Merchant.where(attribute => params[attribute].downcase)
+        respond_with Merchant.where(attributes(params))
       end
+
+      def random
+        respond_with Merchant.all.sample
+      end
+
+      private
+        def attributes(params)
+          attributes = params.symbolize_keys.except!(:format, :controller, :action)
+          attributes.each_value { |v| v.downcase! }
+        end
     end
   end
 end
