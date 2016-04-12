@@ -22,17 +22,23 @@ RSpec.describe "GET /api/v1/merchants/1" do
     json_body = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(json_body["name"]).to eq "Schroeder-Jerde"
+    expect(json_body["name"]).to eq "schroeder-jerde"
   end
 end
 
-RSpec.describe "GET /api/v1/merchants/find?name=Schroeder-Jerde" do
+RSpec.describe "GET /api/v1/merchants/find?name=schroeder-jerde" do
   it "returns merchant with name = Schroeder-Jerde" do
     merchant = Merchant.create(name: "Schroeder-Jerde")
 
-    get "/api/v1/merchants/find?name=Schroeder-Jerde"
+    get "/api/v1/merchants/find?name=schroeder-jerde"
     json_body = JSON.parse(response.body)
 
     expect(response).to be_success
   end
 end
+
+# RSpec.describe "GET /api/v1/merchants/find_all?name=Cummings-Thiel" do
+#   it "returns all merchants whose name matches Cummings-Thiel" do
+#
+#   end
+# end
