@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :merchants, except: [:new, :edit] do
         # collection do
           get "find", on: :collection
+          get "find_all", on: :collection
         # end
       end
     end
