@@ -10,6 +10,11 @@ module Api
       def show
         respond_with Merchant.find(params[:id])
       end
+
+      def find
+        attribute = params.first[0]
+        respond_with Merchant.find_by(attribute => params[attribute])
+      end
     end
   end
 end
