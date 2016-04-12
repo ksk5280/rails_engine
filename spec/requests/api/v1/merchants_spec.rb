@@ -25,3 +25,14 @@ RSpec.describe "GET /api/v1/merchants/1" do
     expect(json_body["name"]).to eq "Schroeder-Jerde"
   end
 end
+
+RSpec.describe "GET /api/v1/merchants/find?name=Schroeder-Jerde" do
+  it "returns merchant with name = Schroeder-Jerde" do
+    merchant = Merchant.create(name: "Schroeder-Jerde")
+
+    get "/api/v1/merchants/find?name=Schroeder-Jerde"
+    json_body = JSON.parse(response.body)
+
+    expect(response).to be_success
+  end
+end
