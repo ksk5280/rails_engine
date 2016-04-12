@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409232510) do
+ActiveRecord::Schema.define(version: 20160412212304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "customers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.citext   "first_name", null: false
+    t.citext   "last_name",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160409232510) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "merchant_id"
-    t.text     "status"
+    t.citext   "status",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -47,8 +48,8 @@ ActiveRecord::Schema.define(version: 20160409232510) do
   add_index "invoices", ["merchant_id"], name: "index_invoices_on_merchant_id", using: :btree
 
   create_table "items", force: :cascade do |t|
-    t.text     "name"
-    t.text     "description"
+    t.citext   "name",        null: false
+    t.citext   "description"
     t.decimal  "unit_price"
     t.integer  "merchant_id"
     t.datetime "created_at",  null: false
@@ -56,18 +57,17 @@ ActiveRecord::Schema.define(version: 20160409232510) do
   end
 
   create_table "merchants", force: :cascade do |t|
-    t.text     "name"
+    t.citext   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.text     "result"
+    t.citext   "result",             null: false
     t.integer  "invoice_id"
     t.text     "credit_card_number"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.text     "credit_card_expiration_date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_foreign_key "invoice_items", "invoices"
