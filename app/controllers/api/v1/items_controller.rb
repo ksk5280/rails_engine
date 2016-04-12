@@ -9,6 +9,7 @@ module Api
       end
 
       def show
+        binding.pry
         respond_with Item.find(params[:id])
       end
     end
