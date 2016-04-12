@@ -20,32 +20,44 @@ RSpec.describe "GET /api/v1/customers/1" do
     get "/api/v1/customers/#{customer.id}"
 
     expect(response).to be_success
-    expect(json_body["first_name"]).to eq "joey"
-    expect(json_body["last_name"]).to eq "ondricka"
+    expect(json_body["first_name"]).to eq "Joey"
+    expect(json_body["last_name"]).to eq "Ondricka"
+  end
+end
+
+RSpec.describe "GET /api/v1/customers/find?first_name=Joey" do
+  it "returns customer with first_name = Joey" do
+    Customer.create(first_name: "Joey", last_name: "Ondricka")
+
+    get "/api/v1/customers/find?first_name=Joey"
+
+    expect(response).to be_success
+    expect(json_body["first_name"]).to eq "Joey"
+    expect(json_body["last_name"]).to eq "Ondricka"
   end
 end
 
 RSpec.describe "GET /api/v1/customers/find?first_name=joey" do
-  it "returns customer with first_name = joey" do
+  it "returns customer with first_name = joey, case-insensitive" do
     Customer.create(first_name: "Joey", last_name: "Ondricka")
 
     get "/api/v1/customers/find?first_name=joey"
 
     expect(response).to be_success
-    expect(json_body["first_name"]).to eq "joey"
-    expect(json_body["last_name"]).to eq "ondricka"
+    expect(json_body["first_name"]).to eq "Joey"
+    expect(json_body["last_name"]).to eq "Ondricka"
   end
 end
 
-RSpec.describe "GET /api/v1/customers/find?last_name=ondricka" do
-  it "returns customer with last_name = ondricka" do
+RSpec.describe "GET /api/v1/customers/find?last_name=Ondricka" do
+  it "returns customer with last_name = Ondricka" do
     Customer.create(first_name: "Joey", last_name: "Ondricka")
 
-    get "/api/v1/customers/find?last_name=ondricka"
+    get "/api/v1/customers/find?last_name=Ondricka"
 
     expect(response).to be_success
-    expect(json_body["first_name"]).to eq "joey"
-    expect(json_body["last_name"]).to eq "ondricka"
+    expect(json_body["first_name"]).to eq "Joey"
+    expect(json_body["last_name"]).to eq "Ondricka"
   end
 end
 
@@ -71,6 +83,6 @@ RSpec.describe "GET api/v1/customers/random" do
     get "/api/v1/customers/random"
 
     expect(response).to be_success
-    expect(Customer.find(json_body["id"]).valid?).to be true
+    expect(Customer.find(json_body[0]["id"]).valid?).to be true
   end
 end

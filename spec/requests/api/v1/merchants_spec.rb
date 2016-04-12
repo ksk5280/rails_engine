@@ -19,7 +19,7 @@ RSpec.describe "GET /api/v1/merchants/1" do
     get "/api/v1/merchants/#{merchant.id}"
 
     expect(response).to be_success
-    expect(json_body["name"]).to eq "schroeder-jerde"
+    expect(json_body["name"]).to eq "Schroeder-Jerde"
   end
 end
 
@@ -30,7 +30,18 @@ RSpec.describe "GET /api/v1/merchants/find?name=Schroeder-Jerde" do
     get "/api/v1/merchants/find?name=Schroeder-Jerde"
 
     expect(response).to be_success
-    expect(json_body["name"]).to eq "schroeder-jerde"
+    expect(json_body["name"]).to eq "Schroeder-Jerde"
+  end
+end
+
+RSpec.describe "GET /api/v1/merchants/find?name=schroeder-jerde" do
+  it "returns merchant with name = Schroeder-Jerde, case-insensitive" do
+    Merchant.create(name: "Schroeder-Jerde")
+
+    get "/api/v1/merchants/find?name=schroeder-jerde"
+
+    expect(response).to be_success
+    expect(json_body["name"]).to eq "Schroeder-Jerde"
   end
 end
 
@@ -41,7 +52,7 @@ RSpec.describe "GET /api/v1/merchants/find?name=klein, rempel and jones" do
     get "/api/v1/merchants/find?name=Klein%2C%20Rempel%20and%20Jones"
 
     expect(response).to be_success
-    expect(json_body["name"]).to eq "klein, rempel and jones"
+    expect(json_body["name"]).to eq "Klein, Rempel and Jones"
   end
 end
 
@@ -60,13 +71,13 @@ end
 
 RSpec.describe "GET api/v1/merchants/random" do
   it "returns a random merchant" do
-    Merchant.create(name: "schroeder-jerde")
-    Merchant.create(name: "klein, rempel and jones")
-    Merchant.create(name: "willms and sons")
+    Merchant.create(name: "Schroeder-Jerde")
+    Merchant.create(name: "Klein, Rempel and Jones")
+    Merchant.create(name: "Willms and Sons")
 
     get "/api/v1/merchants/random"
 
     expect(response).to be_success
-    expect(Merchant.find(json_body["id"]).valid?).to be true
+    expect(Merchant.find(json_body[0]["id"]).valid?).to be true
   end
 end

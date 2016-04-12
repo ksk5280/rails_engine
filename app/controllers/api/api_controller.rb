@@ -20,12 +20,11 @@ module Api
     end
 
     def random
-      respond_with model.all.sample
+      respond_with model.limit(1).order("RANDOM()")
     end
 
     def attributes(params)
       attributes = params.symbolize_keys.except!(:format, :controller, :action)
-      attributes.each_value { |v| v.downcase! }
     end
   end
 end
