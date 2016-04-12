@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412201239) do
+ActiveRecord::Schema.define(version: 20160412212304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,12 +63,11 @@ ActiveRecord::Schema.define(version: 20160412201239) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.citext   "result",                      null: false
+    t.citext   "result",             null: false
     t.integer  "invoice_id"
     t.text     "credit_card_number"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.text     "credit_card_expiration_date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_foreign_key "invoice_items", "invoices"
