@@ -13,7 +13,7 @@ module Api
       end
 
       def most_revenue
-        respond_with Merchant.max_revenue(params[:number])
+        respond_with Merchant.max_revenue(params[:quantity])
       end
     end
   end

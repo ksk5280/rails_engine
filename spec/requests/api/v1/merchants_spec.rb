@@ -86,8 +86,6 @@ RSpec.describe "GET /api/v1/merchants/most_revenue?quantity=x" do
   xit "returns the top x merchants ranked by total revenue" do
     Merchant.create(name: "Schroeder-Jerde")
 
-
-
     get "/api/v1/merchants/most_revenue?quantity=2"
 
     expect(response).to be_success

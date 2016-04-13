@@ -99,13 +99,3 @@ RSpec.describe "GET api/v1/items/random" do
     expect(Item.find(json_body[0]["id"]).valid?).to be true
   end
 end
-
-RSpec.describe "GET /api/v1/items/most_revenue?quantity=x" do
-  xit "returns the top x items ranked by total revenue" do
-
-    get "/api/v1/items/most_revenue?quantity=2"
-
-    expect(response).to be_success
-    expect(json_body.count).to eq 2
-  end
-end
