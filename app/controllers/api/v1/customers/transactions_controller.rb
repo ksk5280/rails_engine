@@ -1,12 +1,12 @@
 module Api
   module V1
-    module Merchants
-      class ItemsController < ApplicationController
+    module Customers
+      class TransactionsController < ApplicationController
         protect_from_forgery with: :null_session
         respond_to :json
 
         def index
-          respond_with Merchant.find(params[:merchant_id]).items
+          respond_with Customer.find(params[:customer_id]).transactions
         end
       end
     end
