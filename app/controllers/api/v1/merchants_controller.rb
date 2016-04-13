@@ -11,6 +11,10 @@ module Api
       def show
         respond_with Merchant.find(params[:id])
       end
+
+      def most_revenue
+        respond_with Merchant.max_revenue(params[:number])
+      end
     end
   end
 end

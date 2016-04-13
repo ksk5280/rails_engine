@@ -24,7 +24,7 @@ module Api
     end
 
     def attributes(params)
-      attributes = params.symbolize_keys.except!(:format, :controller, :action)
+      params.symbolize_keys.except!(:format, :controller, :action)
     end
   end
 end
