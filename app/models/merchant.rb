@@ -5,7 +5,7 @@ class Merchant < ActiveRecord::Base
 
   # GET /api/v1/merchants/most_revenue?quantity=x
   # returns to top x merchants ranked by total revenue
-  def self.max_revenue(x)
+  def self.most_revenue(x)
     select("merchants.id, merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue").
     joins(:invoices, "INNER JOIN invoice_items on invoices.id=invoice_items.invoice_id").
     group("merchants.id").
