@@ -6,11 +6,13 @@ Rails.application.routes.draw do
         get "find",         to: "search#show"
         get "find_all",     to: "search#index"
         get "random",       to: "random#show"
-        get "most_revenue", to: "most_revenue#index"
+        get "most_revenue", to: "revenue#show"
       end
       resources :merchants, only: [:index, :show] do
         resources :items, only: [:index], to: "merchants/items#index"
         resources :invoices, only: [:index], to: "merchants/invoices#index"
+        get "revenue", to: "merchants/revenue#index"
+        get "customers_with_pending_invoices", to: "merchants/customers_with_pending_invoices#index"
       end
 
       resources :customers, only: [:index, :show] do
