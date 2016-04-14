@@ -1,10 +1,11 @@
 require "rails_helper"
+require "test_helper"
 
 RSpec.describe "GET /api/v1/customers" do
   it "returns a list of customers" do
-    Customer.create(first_name: "Joey", last_name: "Ondricka")
-    Customer.create(first_name: "Cecilia", last_name: "Osinski")
-    Customer.create(first_name: "Mariah", last_name: "Toy")
+    create_customer("Joey", "Ondricka")
+    create_customer("Cecilia", "Osinski")
+    create_customer("Mariah", "Toy")
 
     get "/api/v1/customers"
 

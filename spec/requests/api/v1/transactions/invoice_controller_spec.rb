@@ -12,7 +12,7 @@ RSpec.describe "GET /api/v1/transactions/:id/invoice" do
     )
     invoice2 = merchant2.invoices.create(
       customer_id: customer2.id,
-      status: "not shipped",
+      status: "pending",
     )
     transaction1 = invoice1.transactions.create(
       result: "success",
