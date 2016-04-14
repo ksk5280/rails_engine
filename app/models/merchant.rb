@@ -61,11 +61,17 @@ class Merchant < ActiveRecord::Base
   # GET /api/v1/merchants/most_items?quantity=x
   # returns the top x merchants ranked by total number of items sold
   def self.most_items(x)
-    # binding.pry
-    # select("merchants.id, merchants.name, COUNT(invoice_items.quantity) AS total_items").
-    # joins(:invoices, "INNER JOIN invoice_items on invoices.id=invoice_items.invoice_id").
-    # group("merchants.id").
-    # order("total_items DESC").
-    # limit(x)
+    select("merchants.id, merchants.name, COUNT(invoice_items.quantity) AS total_items").
+    joins(invoices: [:invoice_items, :transactions]).
+    where(transactions: {result: "success"}).
+    group("merchants.id").
+    order("total_items DESC").
+    limit(x)
+  end
+
+  # GET /api/v1/merchants/revenue?date=x
+  # returns the total revenue for date x across all merchants
+  def self.revenue_by_date(date)
+
   end
 end
