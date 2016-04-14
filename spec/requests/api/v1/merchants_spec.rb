@@ -1,4 +1,5 @@
 require "rails_helper"
+require "test_helper"
 
 RSpec.describe "GET /api/v1/merchants" do
   it "returns a list of merchants" do
@@ -90,6 +91,7 @@ RSpec.describe "GET /api/v1/merchants/most_revenue?quantity=x" do
 
     expect(response).to be_success
     expect(json_body.count).to eq 2
+    expect(json_body.first["total_revenue"]).to eq "700.0"
   end
 end
 

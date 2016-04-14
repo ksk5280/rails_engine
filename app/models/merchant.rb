@@ -19,8 +19,7 @@ class Merchant < ActiveRecord::Base
   def revenue_by_date(date)
     realdate = DateTime.parse(date)
 
-    sum = invoices.
-      joins(:invoice_items, :transactions).
+    sum = invoices.joins(:invoice_items, :transactions).
       where(transactions: {result: "success"}).
       where(invoices: {created_at: realdate.beginning_of_day..realdate.end_of_day }).
       sum("invoice_items.quantity * invoice_items.unit_price").to_s
@@ -52,7 +51,6 @@ class Merchant < ActiveRecord::Base
   def self.most_revenue(x)
     select("merchants.id, merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue").
     joins(invoices: :invoice_items).
-    # joins(:invoices, "INNER JOIN invoice_items on invoices.id=invoice_items.invoice_id").
     group("merchants.id").
     order("total_revenue DESC").
     limit(x)
@@ -62,11 +60,11 @@ class Merchant < ActiveRecord::Base
   # returns the top x merchants ranked by total number of items sold
   def self.most_items(x)
     select("merchants.id, merchants.name, COUNT(invoice_items.quantity) AS total_items").
-    joins(invoices: [:invoice_items, :transactions]).
-    where(transactions: {result: "success"}).
-    group("merchants.id").
-    order("total_items DESC").
-    limit(x)
+      joins(invoices: [:invoice_items, :transactions]).
+      where(transactions: {result: "success"}).
+      group("merchants.id").
+      order("total_items DESC").
+      limit(x)
   end
 
   # GET /api/v1/merchants/revenue?date=x
