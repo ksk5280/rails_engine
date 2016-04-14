@@ -10,6 +10,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'pg'
 gem 'responders', '~> 2.0'
+gem "active_model_serializers", github: "rails-api/active_model_serializers"
 gem 'rails_12factor', group: :production
 group :development, :test do
   gem 'pry'

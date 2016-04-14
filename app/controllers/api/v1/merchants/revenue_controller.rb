@@ -4,9 +4,10 @@ module Api
       class RevenueController < ApplicationController
         protect_from_forgery with: :null_session
         respond_to :json
-        
+
         def index
           respond_with Merchant.most_revenue(params[:quantity])
+          binding.pry
         end
 
         def show

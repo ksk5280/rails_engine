@@ -6,16 +6,18 @@ module Api
         respond_to :json
 
         def index
-          respond_with Merchant.where(attributes(params))
+          respond_with Merchant.where(merchant_params)
         end
 
         def show
-          respond_with Merchant.find_by(attributes(params))
+          respond_with Merchant.find_by(merchant_params)
         end
 
         private
-          def attributes(params)
-            params.symbolize_keys.except!(:format, :controller, :action)
+          def merchant_params
+            # params.symbolize_keys.except!(:format, :controller, :action)
+            # binding.pry
+            params.permit(:id, :name, :created_at)
           end
       end
     end

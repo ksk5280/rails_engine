@@ -1,4 +1,5 @@
 require "rails_helper"
+require "test_helper"
 
 RSpec.describe "GET /api/v1/merchants" do
   it "returns a list of merchants" do
@@ -83,12 +84,13 @@ RSpec.describe "GET api/v1/merchants/random" do
 end
 
 RSpec.describe "GET /api/v1/merchants/most_revenue?quantity=x" do
-  xit "returns the top x merchants ranked by total revenue" do
-    Merchant.create(name: "Schroeder-Jerde")
+  it "returns the top x merchants ranked by total revenue" do
+    create_all
 
     get "/api/v1/merchants/most_revenue?quantity=2"
 
     expect(response).to be_success
     expect(json_body.count).to eq 2
+    expect(json_body.first["total_revenue"]).to eq "700.0"
   end
 end
