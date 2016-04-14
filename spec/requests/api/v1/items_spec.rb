@@ -1,23 +1,5 @@
 require "rails_helper"
 
-def create_items
-  Item.create(
-    name: "Shirt",
-    description: "Shirt description",
-    unit_price: 50,
-  )
-  Item.create(
-    name: "Pants",
-    description: "Pants description",
-    unit_price: 75,
-  )
-  Item.create(
-    name: "Socks",
-    description: "Socks description",
-    unit_price: 25,
-  )
-end
-
 RSpec.describe "GET /api/v1/items" do
   it "returns a list of items" do
     create_items
