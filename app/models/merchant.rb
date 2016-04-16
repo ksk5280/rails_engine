@@ -52,7 +52,6 @@ class Merchant < ActiveRecord::Base
   def self.most_revenue(x)
     select("merchants.id, merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue").
     joins(invoices: :invoice_items).
-    # joins(:invoices, "INNER JOIN invoice_items on invoices.id=invoice_items.invoice_id").
     group("merchants.id").
     order("total_revenue DESC").
     limit(x)

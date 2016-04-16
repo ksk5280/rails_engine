@@ -1,6 +1,6 @@
 module Api
   module V1
-    class InvoiceItemsController < ApiController
+    class InvoiceItemsController < MethodsController
       def model
         InvoiceItem
       end

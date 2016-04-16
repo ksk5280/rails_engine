@@ -1,6 +1,6 @@
 module Api
   module V1
-    class InvoicesController < ApiController
+    class InvoicesController < MethodsController
       def model
         Invoice
       end

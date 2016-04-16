@@ -1,6 +1,6 @@
 module Api
   module V1
-    class CustomersController < ApiController
+    class CustomersController < MethodsController
       def model
         Customer
       end

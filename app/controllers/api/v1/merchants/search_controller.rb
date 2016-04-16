@@ -1,10 +1,7 @@
 module Api
   module V1
     module Merchants
-      class SearchController < ApplicationController
-        protect_from_forgery with: :null_session
-        respond_to :json
-
+      class SearchController < ApiController
         def index
           respond_with Merchant.where(attributes(params))
         end
