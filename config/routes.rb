@@ -9,46 +9,46 @@ Rails.application.routes.draw do
         get "most_revenue", to: "revenue#index"
         get "most_items",   to: "items#show"
       end
-      resources :merchants, only: [:index, :show] do
-        resources :items, only: [:index], to: "merchants/items#index"
-        resources :invoices, only: [:index], to: "merchants/invoices#index"
-        get "revenue", to: "merchants/revenue#show"
-        get "customers_with_pending_invoices", to: "merchants/customers_with_pending_invoices#index"
-        get "favorite_customer", to: "merchants/favorite_customer#show"
+      resources :merchants, only: [:index, :show], module: "merchants" do
+        resources :items, only: [:index],      to: "items#index"
+        resources :invoices, only: [:index],   to: "invoices#index"
+        get "revenue",                         to: "revenue#show"
+        get "customers_with_pending_invoices", to: "customers_with_pending_invoices#index"
+        get "favorite_customer",               to: "favorite_customer#show"
       end
 
-      resources :customers, only: [:index, :show] do
+      resources :customers, only: [:index, :show], module: "customers" do
         collection do
           get "find"
           get "find_all"
           get "random"
         end
-        resources :invoices, only: [:index], to: "customers/invoices#index"
-        resources :transactions, only: [:index], to: "customers/transactions#index"
-        get "favorite_merchant", to: "customers/favorite_merchant#show"
+        resources :invoices, only: [:index],     to: "invoices#index"
+        resources :transactions, only: [:index], to: "transactions#index"
+        get "favorite_merchant",                 to: "favorite_merchant#show"
       end
 
-      resources :invoices, only: [:index, :show] do
+      resources :invoices, only: [:index, :show], module: "invoices" do
         collection do
           get "find"
           get "find_all"
           get "random"
         end
-        resources :transactions, only: [:index], to: "invoices/transactions#index"
-        resources :invoice_items, only: [:index], to: "invoices/invoice_items#index"
-        resources :items, only: [:index], to: "invoices/items#index"
-        resources :customer, only: [:index], to: "invoices/customer#index"
-        resources :merchant, only: [:index], to: "invoices/merchant#index"
+        get "transactions",  to: "transactions#index"
+        get "invoice_items", to: "invoice_items#index"
+        get "items",         to: "items#index"
+        get "customer",      to: "customer#show"
+        get "merchant",      to: "merchant#show"
       end
 
-      resources :invoice_items, only: [:index, :show] do
+      resources :invoice_items, only: [:index, :show], module: "invoice_items" do
         collection do
           get "find"
           get "find_all"
           get "random"
         end
-        resources :invoice, only: [:index], to: "invoice_items/invoice#index"
-        resources :item, only: [:index], to: "invoice_items/item#index"
+        resources :invoice, only: [:index], to: "invoice#index"
+        resources :item, only: [:index],    to: "item#index"
       end
 
       namespace :items, only:[:index, :show] do
@@ -56,18 +56,18 @@ Rails.application.routes.draw do
         get "find_all", to: "search#index"
         get "random", to: "random#show"
       end
-      resources :items, only: [:index, :show] do
-        resources :invoice_items, only: [:index], to: "items/invoice_items#index"
-        resources :merchant, only: [:index], to: "items/merchant#index"
+      resources :items, only: [:index, :show], module: "items" do
+        resources :invoice_items, only: [:index], to: "invoice_items#index"
+        resources :merchant, only: [:index],      to: "merchant#index"
       end
 
-      resources :transactions, only: [:index, :show] do
+      resources :transactions, only: [:index, :show], module: "transactions" do
         collection do
           get "find"
           get "find_all"
           get "random"
         end
-        resources :invoice, only: [:index], to: "transactions/invoice#index"
+        resources :invoice, only: [:index], to: "invoice#index"
       end
     end
   end
