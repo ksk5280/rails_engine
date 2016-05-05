@@ -82,14 +82,14 @@ GET /api/v1/merchants/find?parameters
 ```
 
 ##### Request Parameters
-
+```
 | parameter  | description                          |
 -----------------------------------------------------
 | id         | search based on the primary key      |
 | name       | search based on the name attribute   |
 | created_at | search based on created_at timestamp |
 | updated_at | search based on updated_at timestamp |
-
+```
 ##### JSON Output
 
 `GET /api/v1/merchants/find?name=Schroeder-Jerde`
@@ -110,14 +110,14 @@ Each category offers `find_all` finders which return all matches for the given q
 `GET /api/v1/merchants/find_all?parameters`
 
 ##### Request Parameters
-
+```
 | parameter  | description                          |
 -----------------------------------------------------
 | id         | search based on the primary key      |
 | name       | search based on the name attribute   |
 | created_at | search based on created_at timestamp |
 | updated_at | search based on updated_at timestamp |
-
+```
 ##### JSON Output
 
 `GET /api/v1/merchants/find_all?name=Cummings-Thiel`
