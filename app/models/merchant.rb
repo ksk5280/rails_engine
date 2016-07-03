@@ -10,8 +10,6 @@ class Merchant < ActiveRecord::Base
       joins(:invoice_items, :transactions).
       where(transactions: {result: "success"}).
       sum("invoice_items.quantity * invoice_items.unit_price").to_s
-
-    { "revenue" => sum }
   end
 
   # GET /api/v1/merchants/:id/revenue?date=x
@@ -24,8 +22,6 @@ class Merchant < ActiveRecord::Base
       where(transactions: {result: "success"}).
       where(invoices: {created_at: realdate.beginning_of_day..realdate.end_of_day }).
       sum("invoice_items.quantity * invoice_items.unit_price").to_s
-
-    { "revenue" => sum }
   end
 
   # GET /api/v1/merchants/:id/favorite_customer

@@ -8,9 +8,9 @@ module Api
 
         def show
           if params[:date]
-            respond_with Merchant.find(params[:merchant_id]).revenue_by_date(params[:date])
+            @merchant = Merchant.find(params[:merchant_id]).revenue_by_date(params[:date])
           else
-            respond_with Merchant.find(params[:merchant_id]).revenue
+            @merchant = Merchant.find(params[:merchant_id]).revenue
           end
         end
       end
